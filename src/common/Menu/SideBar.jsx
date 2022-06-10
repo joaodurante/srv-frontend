@@ -1,8 +1,18 @@
 import React, {useState} from 'react';
-import { Typography, AppBar, Toolbar, Box, IconButton, MenuItem, Menu, Drawer } from '@mui/material';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStore, faHome, faBars, faIdBadge, faPercent, faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
+import '@fontsource/roboto/400.css';
 
-export default function SideBar({menu, drawerWidth, menuItems}) {
+
+export default function SideBar({menu, drawerWidth}) {
+  const menuItems = [
+    {label: 'DASHBOARD', icon: faHome},
+    {label: 'PRODUTOS', icon: faStore},
+    {label: 'FUNCIONÁRIOS', icon: faIdBadge},
+    {label: 'CONVÊNIOS', icon: faPercent},
+    {label: 'VENDAS', icon: faMoneyCheckDollar},
+  ];
 
     return(
         <Drawer
@@ -11,22 +21,33 @@ export default function SideBar({menu, drawerWidth, menuItems}) {
           variant="permanent"
           anchor="left"
           sx={{
-            width: drawerWidth,
+            width: `${drawerWidth}px`,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              width: drawerWidth,
+              width: `${drawerWidth}px`,
               boxSizing: 'border-box',
-            }
+            },
           }}
         >
+          <Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+              backgroundColor: '#282828',
+              paddingLeft: '2rem',
+            }}
+          >
+          </Toolbar>
           <List>
             {menuItems.map((item) => (
-              <ListItem key={item.label} disablePadding>
-                <ListItemButton>
-                  {/* <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */}
-                  <ListItemText classes={{primary:classes.listItemText}} primary={item.label} />
+              <ListItem key={item.label} disablePadding> 
+                <ListItemButton sx={{padding: '1rem'}}>
+                  <ListItemIcon>
+                    <FontAwesomeIcon icon={item.icon} size="lg" color="white"/>
+                  </ListItemIcon>
+                  <ListItemText primary={item.label} />
                 </ListItemButton>
               </ListItem>
             ))}

@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import { Typography, AppBar, Toolbar, Box, IconButton, MenuItem, Menu, Drawer } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faKitchenSet } from '@fortawesome/free-solid-svg-icons';
+import '@fontsource/roboto/300.css';
 
 
 export default function TopBar({menu, auth, drawerWidth}) {
@@ -14,20 +17,11 @@ export default function TopBar({menu, auth, drawerWidth}) {
             backgroundColor: '#282828', 
             marginBottom: '4rem', 
             width: `calc(100% - ${drawerWidth}px)`, 
-            ml: `${drawerWidth}px`
+            ml: `${drawerWidth}px`,
         }}>
           <Toolbar>
-            { menu && (<IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                {/* <MenuIcon /> */}
-              </IconButton>)
-            }
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            { menu && (<FontAwesomeIcon icon={faKitchenSet} size="2xl" color="white"/>) }
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1, marginLeft: '1rem' }}>
               SRV
             </Typography>
             {auth && (
@@ -40,7 +34,7 @@ export default function TopBar({menu, auth, drawerWidth}) {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  {/* <AccountCircle /> */}
+                  <AccountCircle />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
