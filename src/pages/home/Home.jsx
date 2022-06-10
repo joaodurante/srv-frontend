@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, TextField, Button, Box, CssBaseline } from '@mui/material';
-import AppMenu from '../../common/AppMenu';
+import AppMenu from '../../common/Menu/AppMenu';
 import api from '../../services/api';
 import './Home.css';
 

@@ -26,7 +26,7 @@ export default function SideBar({menu, drawerWidth, menuItems}) {
                   {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon> */}
-                  <ListItemText primaryTypographyProps={{fontSize: '20px'}} primary={item.label} />
+                  <ListItemText classes={{primary:classes.listItemText}} primary={item.label} />
                 </ListItemButton>
               </ListItem>
             ))}
