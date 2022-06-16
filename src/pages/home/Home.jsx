@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Typography, TextField, Button, Box, CssBaseline } from '@mui/material';
+import React from 'react';
+import { Box, CssBaseline } from '@mui/material';
 import AppMenu from '../../common/Menu/AppMenu';
-import api from '../../services/api';
 import './Home.css';
 
 export default function Home() {
     return(
         <Box sx={{ display: 'flex' }}>
-        <AppMenu menu={true} auth={false} />
+        <AppMenu menu={true} auth={true} />
         <CssBaseline />
         <Box sx={{ 
             flexGrow: 1, 
