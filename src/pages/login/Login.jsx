@@ -5,7 +5,7 @@ import AppMenu from '../../common/Menu/AppMenu';
 import api from '../../services/api';
 import './Login.css';
 
-function Login(){
+export default function Login(){
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const history = useNavigate();
@@ -46,5 +46,3 @@ function Login(){
         </Box>
     )
 }
-
-export default Login;
