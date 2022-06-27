@@ -3,40 +3,41 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, D
 import {apiCaller, apiAlert} from '../../services/api';
 
 
-export default function CrudDialog({ open, operation, productToUpdate, handleClose }) {
-    const [product, setProduct] = useState({
+export default function CrudDialog({ open, operation, employeeToUpdate, handleClose }) {
+    const [employee, setEmployee] = useState({
         id: null,
         name: '',
-        description: '',
-        value: null,
-        imageUrl: ''
+        cpf: '',
+        role: '',
+        beginHour: '',
+        endHour: ''
     });
 
     useEffect(() => {
-        if(productToUpdate) {
-            setProduct(productToUpdate)
+        if(employeeToUpdate) {
+            setEmployee(employeeToUpdate)
         } else {
-            setProduct({
+            setEmployee({
                 id: null,
                 name: '',
-                description: '',
-                value: null,
-                imageUrl: ''
+                cpf: '',
+                role: '',
+                beginHour: '',
+                endHour: ''
             });
         }
     }, [open]);
 
     const onChange = (e) => {
-        setProduct({...product, [e.target.name]: e.target.value});
+        setEmployee({...employee, [e.target.name]: e.target.value});
     }
 
     const onSubmit = async (e) => {
         let response;
-        console.log('submit')
         if(operation === 'update') {
-            response = await apiCaller({method: 'UPDATE', url: `/v1/product/${product.id}`, data: product});
+            response = await apiCaller({method: 'UPDATE', url: `/v1/employee/${employee.id}`, data: employee});
         } else {
-            response = await apiCaller({method: 'DELETE', url: `/v1/product/${product.id}`});
+            response = await apiCaller({method: 'DELETE', url: `/v1/employee/${employee.id}`});
         }
 
         apiAlert(response);
@@ -52,42 +53,52 @@ export default function CrudDialog({ open, operation, productToUpdate, handleClo
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="Nome do produto"
+                            label="Nome"
                             type="text"
                             fullWidth
                             variant="standard"
                             name="name"
-                            value={product.name}
+                            value={employee.name}
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="Descrição do produto"
+                            label="CPF"
                             type="text"
                             fullWidth
                             variant="standard"
-                            name="description"
-                            value={product.description} 
+                            name="cpf"
+                            value={employee.cpf} 
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="Valor do produto"
-                            type="number"
+                            label="Cargo"
+                            type="text"
                             fullWidth
                             variant="standard"
-                            name="value"
-                            value={product.value} 
+                            name="role"
+                            value={employee.role} 
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="URL da imagem do produto"
+                            label="Horário de entrada"
                             type="text"
                             fullWidth
                             variant="standard"
                             name="imageUrl"
-                            value={product.imageUrl} 
+                            value={employee.beginHour} 
+                            onChange={e => onChange(e)}
+                        />
+                        <TextField
+                            margin="dense"
+                            label="Horário de saída"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            name="endHour"
+                            value={employee.endHour} 
                             onChange={e => onChange(e)}
                         />
                     </DialogContent>
@@ -95,7 +106,7 @@ export default function CrudDialog({ open, operation, productToUpdate, handleClo
                 : (
                     <DialogContent>
                         <DialogContentText>
-                            Tem certeza que deseja remover o produto?
+                            Tem certeza que deseja remover o funcionário?
                         </DialogContentText>
                     </DialogContent>
                 )

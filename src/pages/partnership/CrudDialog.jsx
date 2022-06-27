@@ -3,40 +3,43 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, D
 import {apiCaller, apiAlert} from '../../services/api';
 
 
-export default function CrudDialog({ open, operation, productToUpdate, handleClose }) {
-    const [product, setProduct] = useState({
+export default function CrudDialog({ open, operation, partnershipToUpdate, handleClose }) {
+    const [partnership, setPartnership] = useState({
         id: null,
         name: '',
-        description: '',
-        value: null,
-        imageUrl: ''
+        cnpj: '',
+        discount: '',
+        validity: '',
     });
 
     useEffect(() => {
-        if(productToUpdate) {
-            setProduct(productToUpdate)
+        if(partnershipToUpdate) {
+            setPartnership(partnershipToUpdate)
         } else {
-            setProduct({
+            setPartnership({
                 id: null,
                 name: '',
-                description: '',
-                value: null,
-                imageUrl: ''
+                cnpj: '',
+                discount: '',
+                validity: '',
             });
         }
     }, [open]);
 
     const onChange = (e) => {
-        setProduct({...product, [e.target.name]: e.target.value});
+        setPartnership({...partnership, [e.target.name]: e.target.value});
     }
 
     const onSubmit = async (e) => {
         let response;
-        console.log('submit')
         if(operation === 'update') {
-            response = await apiCaller({method: 'UPDATE', url: `/v1/product/${product.id}`, data: product});
+            if(!partnership.validity.includes('T')) {
+                partnership.validity = partnership.validity + 'T00:00:00Z';
+            }
+
+            response = await apiCaller({method: 'UPDATE', url: `/v1/partnership/${partnership.id}`, data: partnership});
         } else {
-            response = await apiCaller({method: 'DELETE', url: `/v1/product/${product.id}`});
+            response = await apiCaller({method: 'DELETE', url: `/v1/partnership/${partnership.id}`});
         }
 
         apiAlert(response);
@@ -52,42 +55,42 @@ export default function CrudDialog({ open, operation, productToUpdate, handleClo
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="Nome do produto"
+                            label="Nome"
                             type="text"
                             fullWidth
                             variant="standard"
                             name="name"
-                            value={product.name}
+                            value={partnership.name}
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="Descrição do produto"
+                            label="CNPJ"
                             type="text"
                             fullWidth
                             variant="standard"
-                            name="description"
-                            value={product.description} 
+                            name="cnpj"
+                            value={partnership.cnpj} 
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="Valor do produto"
+                            label="Desconto"
                             type="number"
                             fullWidth
                             variant="standard"
-                            name="value"
-                            value={product.value} 
+                            name="discount"
+                            value={partnership.discount} 
                             onChange={e => onChange(e)}
                         />
                         <TextField
                             margin="dense"
-                            label="URL da imagem do produto"
-                            type="text"
+                            label="Horário de entrada"
+                            type="date"
                             fullWidth
                             variant="standard"
-                            name="imageUrl"
-                            value={product.imageUrl} 
+                            name="validity"
+                            value={partnership.validity ? partnership.validity.split('T')[0] : ''} 
                             onChange={e => onChange(e)}
                         />
                     </DialogContent>
@@ -95,7 +98,7 @@ export default function CrudDialog({ open, operation, productToUpdate, handleClo
                 : (
                     <DialogContent>
                         <DialogContentText>
-                            Tem certeza que deseja remover o produto?
+                            Tem certeza que deseja remover o convênio?
                         </DialogContentText>
                     </DialogContent>
                 )

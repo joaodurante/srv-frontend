@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
 import AppMenu from '../../common/Menu/AppMenu';
-import api from '../../services/api';
+import {apiCaller, apiAlert} from '../../services/api';
 import './Login.css';
 
 export default function Login(){
@@ -13,7 +13,13 @@ export default function Login(){
     const handleSubmit = async (event) =>{
         event.preventDefault();
         
-        // const response = await api.post('/login', {username, password});
+        // const response = await apiCaller({method: 'POST', url: '/v1/login', data: {username, password}});
+        // if(response.status === 200) {
+        //     console.log(response)
+        //     localStorage.setItem('token', response.headers.Authorization);
+        // } else {
+        //     return false;
+        // }
         history('/home');
     }
 

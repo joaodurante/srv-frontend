@@ -12,7 +12,7 @@ export default function SideBar({ menu, drawerWidth }) {
     { label: 'DASHBOARD', icon: faHome, uri: '/home' },
     { label: 'PRODUTOS', icon: faStore, uri: '/products' },
     { label: 'FUNCIONÁRIOS', icon: faIdBadge, uri: '/employees' },
-    { label: 'CONVÊNIOS', icon: faPercent, uri: '/agreements' },
+    { label: 'CONVÊNIOS', icon: faPercent, uri: '/partnerships' },
     { label: 'VENDAS', icon: faMoneyCheckDollar, uri: '/sales' },
   ];
 
