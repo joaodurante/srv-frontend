@@ -48,7 +48,7 @@ export default function TopBar({ menu, auth, drawerWidth }) {
       <Toolbar>
         <FontAwesomeIcon icon={faKitchenSet} size="2xl" color="white" />
         <Typography variant="h5" component="div" sx={{ flexGrow: 1, marginLeft: '1rem' }}>
-          SRV
+          SVR
         </Typography>
         {auth && (
           <div>
